@@ -1,0 +1,43 @@
+{
+  "skill_name": "repo-analysis",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "帮我分析这个仓库：https://github.com/vivekchand/clawmetry，目标目录 C:/project，我需要了解它的整体架构、核心模块职责，以及它和 OpenClaw 的依赖关系。",
+      "expected_output": "生成 PROJECT_INDEX/ 目录，包含：architecture.md、四层契约分析文档、至少一个关键模块解读文档（sync.py 或 dashboard.py）、最终解读报告。报告中应正确识别出 ClawMetry 是双产品线（本地仪表盘 + 云同步客户端），并说明与 OpenClaw 的硬耦合点（JSONL 文件格式、WebSocket RPC）。",
+      "files": [],
+      "expectations": [
+        "生成了 PROJECT_INDEX/最终解读报告_*.md",
+        "报告中正确识别项目有本地仪表盘和云同步两条独立产品线",
+        "报告说明了与 OpenClaw 的具体耦合点（至少提到 JSONL 文件路径或 WebSocket）",
+        "识别了 dashboard.py 实际行数与文档声称不符（文档~11,600行，实际~33,718行）",
+        "生成了代码签名索引（PROJECT_INDEX/history/ 下有 .md 文件）"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "我有一个 Node.js + TypeScript 的仓库需要理解：https://github.com/anthropics/anthropic-sdk-python，请帮我分析它的架构，重点是了解它的 API 设计模式和如何扩展新的端点。",
+      "expected_output": "生成架构文档，说明 SDK 的核心设计（资源类结构、HTTP 客户端封装、类型系统），并给出添加新 API 端点的扩展指引。即便这是 Python SDK（不是 Node.js），skill 应能灵活处理并产出有价值的报告。",
+      "files": [],
+      "expectations": [
+        "生成了 PROJECT_INDEX/architecture.md",
+        "架构文档说明了 SDK 的核心设计模式（如资源类、HTTP 客户端封装）",
+        "生成了最终报告或四层契约分析",
+        "报告中包含对扩展方式的指引"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "我需要复现 https://github.com/openai/openai-python 这个项目的核心功能，但在开始写代码之前，先帮我彻底读懂它的结构：入口在哪里、资源类怎么组织、流式响应是怎么实现的、测试结构是什么样的。",
+      "expected_output": "生成完整分析报告，覆盖入口文件、资源类组织、流式响应实现机制（AsyncStream/Stream 类）、测试框架。这是一个'复现前调研'场景，报告应能直接指导复现工作。",
+      "files": [],
+      "expectations": [
+        "生成了最终解读报告",
+        "报告识别了入口文件和主要命令/类",
+        "报告说明了流式响应的实现方式",
+        "报告包含对测试结构的说明",
+        "生成了代码签名索引"
+      ]
+    }
+  ]
+}
